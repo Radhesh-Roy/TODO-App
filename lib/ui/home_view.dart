@@ -29,18 +29,56 @@ class _HomeViewPageState extends State<HomeViewPage> {
             child: ListView.builder(
               itemCount: 10,
               itemBuilder: (context, index) {
-              return ListTile(
-                title: Text("call my friend business perpose"),
-                leading: Checkbox(
-                  activeColor: Colors.blue,
-                  value: true, onChanged: (value) => null,),
-
+              return Container(
+                margin: EdgeInsets.all(5),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey,width: 1),
+                  borderRadius: BorderRadius.circular(10)
+                ),
+                child:InkWell(
+                  onLongPress: (){
+                    showDialog(context: context, builder: (context) {
+                      return  Dialog(
+                        backgroundColor: Colors.white,
+                        child: Padding(padding: EdgeInsets.all(10),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text("What dou you want?", style: TextStyle(fontSize: 20),),
+                            SizedBox(height: 15,),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 40,
+                                  width: 140,
+                                  color: Colors.green,
+                                ),
+                                SizedBox(width: 10,),
+                                Container(
+                                  height: 40,
+                                  width: 140,
+                                  color: Colors.red,
+                                ),
+                              ],
+                            )
+                          ],
+                        ),),
+                      );
+                    },);
+                  },
+                  child: ListTile(
+                    title: Text("call my friend business purpose"),
+                    leading: Checkbox(
+                      activeColor: Colors.blue,
+                      value: true, onChanged: (value) => null,),
+                  ),
+                ),
               );
             },),
           )
-
-
-
         ],
       ),
 
