@@ -37,6 +37,7 @@ class _HomeViewPageState extends State<HomeViewPage> {
                   borderRadius: BorderRadius.circular(10)
                 ),
                 child:InkWell(
+
                   onLongPress: (){
 
                     showDialog(context: context, builder: (context) {
