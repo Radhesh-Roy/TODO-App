@@ -38,6 +38,7 @@ class _HomeViewPageState extends State<HomeViewPage> {
                 ),
                 child:InkWell(
                   onLongPress: (){
+
                     showDialog(context: context, builder: (context) {
                       return  Dialog(
                         backgroundColor: Colors.white,
