@@ -57,6 +57,7 @@ class _HomeViewPageState extends State<HomeViewPage> {
                                   color: Colors.green,
                                 ),
                                 SizedBox(width: 10,),
+
                                 Container(
                                   height: 40,
                                   width: 140,
