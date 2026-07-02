@@ -33,6 +33,7 @@ class _HomeViewPageState extends State<HomeViewPage> {
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: "Enter Task",
+                          suffixIcon: Icon(Icons.mic, size: 25,)
 
                         ),
 
