@@ -44,6 +44,7 @@ class _HomeViewPageState extends State<HomeViewPage> {
                               return "Enter Tasks";
                             }
                           },
+
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: "Enter Task",
