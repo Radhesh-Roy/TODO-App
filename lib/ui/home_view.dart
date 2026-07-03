@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class HomeViewPage extends StatefulWidget {
@@ -8,6 +10,10 @@ class HomeViewPage extends StatefulWidget {
 }
 
 class _HomeViewPageState extends State<HomeViewPage> {
+
+  final key=GlobalKey<FormState>();
+  TextEditingController task= TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,32 +30,50 @@ class _HomeViewPageState extends State<HomeViewPage> {
               child: Padding(padding: EdgeInsets.all(20),
               child: Stack(
                 children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text("Add Task", style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400),),
-                      SizedBox(height: 10,),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: "Enter Task",
-                          suffixIcon: Icon(Icons.mic, size: 25,)
+                  Form(
+                    key: key,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text("Add Task", style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400),),
+                        SizedBox(height: 10,),
+                        TextFormField(
+                          controller: task,
+                          validator: (value){
+                            if(value==null|| value.isEmpty){
+                              return "Enter Tasks";
+                            }
+                          },
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: "Enter Task",
+                            suffixIcon: Icon(Icons.mic, size: 25,)
+
+                          ),
 
                         ),
+                        SizedBox(height: 10,),
+                        InkWell(
+                          onTap: (){
+                            if(key.currentState!.validate()){
+                              log("correct");
 
-                      ),
-                      SizedBox(height: 10,),
-                      Container(
-                        height: 40,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(10)
+                            }
+                            log("Incorrect");
+                          },
+                          child: Container(
+                            height: 40,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                                color: Colors.blue,
+                                borderRadius: BorderRadius.circular(10)
 
-                        ),
-                        child: Center(child: Text("Create Task", style: TextStyle(fontSize: 15, color: Colors.white, fontWeight: FontWeight.w400),),),
-                      )
-                    ],),
+                            ),
+                            child: Center(child: Text("Create Task", style: TextStyle(fontSize: 15, color: Colors.white, fontWeight: FontWeight.w400),),),
+                          ),
+                        )
+                      ],),
+                  ),
                   Positioned(
                       top: 0,
                       right: 0,
@@ -110,7 +134,7 @@ class _HomeViewPageState extends State<HomeViewPage> {
                             Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text("What dou you want?", style: TextStyle(fontSize: 20),),
+                                Text("What do you want?", style: TextStyle(fontSize: 20),),
                                 SizedBox(height: 15,),
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -125,7 +149,6 @@ class _HomeViewPageState extends State<HomeViewPage> {
                                           borderRadius: BorderRadius.circular(10)
                                         ),
                                         child: Center(child:Text("Edit", style: TextStyle(fontSize: 15, color: Colors.green),),),
-
                                       ),
                                     ),
                                     SizedBox(width: 10,),
