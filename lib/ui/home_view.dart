@@ -44,22 +44,17 @@ class _HomeViewPageState extends State<HomeViewPage> {
                               return "Enter Tasks";
                             }
                           },
-
                           decoration: InputDecoration(
-
                             border: OutlineInputBorder(),
                             labelText: "Enter Task",
                             suffixIcon: Icon(Icons.mic, size: 25,)
-
                           ),
-
                         ),
                         SizedBox(height: 10,),
                         InkWell(
                           onTap: (){
                             if(key.currentState!.validate()){
                               log("correct");
-
                             }
                             log("Incorrect");
                           },
