@@ -13,4 +13,12 @@ class TasksModel {
     };
   }
 
+  factory TasksModel.formMap(Map<String, dynamic>maps){
+    return TasksModel(
+      id: maps["id"],
+      task: maps["task"],
+      isComplete: maps["isComplete"]
+    );
+  }
+
 }
