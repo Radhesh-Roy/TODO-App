@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:todo/database/database.dart';
+import 'package:todo/model/tasks_model.dart';
 
 class HomeViewPage extends StatefulWidget {
   const HomeViewPage({super.key});
@@ -10,6 +12,28 @@ class HomeViewPage extends StatefulWidget {
 }
 
 class _HomeViewPageState extends State<HomeViewPage> {
+
+  List<TasksModel>tasks=[];
+
+  Future<void>getTasks()async{
+    tasks= await TaskDatabase.getData();
+    setState(() {});
+  }
+
+  Future<void>addTask()async{
+    await TaskDatabase.insetData(TasksModel(task: task.value.text, isComplete: false));
+    task.clear();
+
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getTasks();
+  }
+
+
 
   final key=GlobalKey<FormState>();
   TextEditingController task= TextEditingController();
@@ -54,7 +78,7 @@ class _HomeViewPageState extends State<HomeViewPage> {
                         InkWell(
                           onTap: (){
                             if(key.currentState!.validate()){
-                              log("correct");
+                              addTask();
                             }
                             log("Incorrect");
                           },
@@ -103,7 +127,7 @@ class _HomeViewPageState extends State<HomeViewPage> {
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.vertical,
-              itemCount: 10,
+              itemCount: tasks.length,
               itemBuilder: (context, index) {
               return Container(
                 margin: EdgeInsets.all(5),
@@ -181,10 +205,10 @@ class _HomeViewPageState extends State<HomeViewPage> {
                     },);
                   },
                   child: ListTile(
-                    title: Text("call my friend business purpose"),
+                    title: Text("${tasks[index].task}"),
                     leading: Checkbox(
                       activeColor: Colors.blue,
-                      value: true, onChanged: (value) => null,),
+                      value: true, onChanged: (value) => tasks[index].isComplete,),
                   ),
                 ),
               );
