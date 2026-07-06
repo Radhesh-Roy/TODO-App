@@ -9,6 +9,7 @@ class TaskDatabase{
     print(await getDatabasesPath());
     if(db != null) return db!;
 
+
     db= await openDatabase(p.join(await getDatabasesPath(), 'todoDb'),onCreate: (db, version){
 return db.execute("create table TodoTable(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, isComplete INTEGER)");
 
