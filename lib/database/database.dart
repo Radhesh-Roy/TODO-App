@@ -19,6 +19,7 @@ return db.execute("create table TodoTable(id INTEGER PRIMARY KEY AUTOINCREMENT, 
 
   static Future<void>insetData(TasksModel taskmodel)async{
     final db= await getDb();
+
     await db.insert("TodoTable", taskmodel.toMap(),conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
