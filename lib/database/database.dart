@@ -23,6 +23,7 @@ return db.execute("create table TodoTable(id INTEGER PRIMARY KEY AUTOINCREMENT, 
   }
 
   static Future<List<TasksModel>>getData()async{
+
     final db= await getDb();
     final List<Map<String, dynamic>>maps=await db.query("TodoTable");
     return List.generate(maps.length, (index) => TasksModel.formMap(maps[index]),);
