@@ -22,8 +22,13 @@ class _HomeViewPageState extends State<HomeViewPage> {
 
   Future<void>addTask()async{
     await TaskDatabase.insetData(TasksModel(task: task.value.text, isComplete: false));
+    await getTasks();
     task.clear();
-
+    Navigator.pop(context);
+  }
+  Future<void> updateTask(TasksModel task) async {
+    await TaskDatabase.updateTask(task);
+    await getTasks();
   }
 
   @override
@@ -76,9 +81,9 @@ class _HomeViewPageState extends State<HomeViewPage> {
                         ),
                         SizedBox(height: 10,),
                         InkWell(
-                          onTap: (){
+                          onTap: ()async{
                             if(key.currentState!.validate()){
-                              addTask();
+                              await addTask();
                             }
                             log("Incorrect");
                           },
@@ -122,7 +127,7 @@ class _HomeViewPageState extends State<HomeViewPage> {
         children: [
           Text("Today's Focus", style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),),
           SizedBox(height: 5,),
-          Text("You have 5 tasks pending today", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: Colors.grey),),
+          Text("You have ${tasks.length} tasks pending today", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: Colors.grey),),
           SizedBox(height: 15,),
           Expanded(
             child: ListView.builder(
@@ -199,7 +204,6 @@ class _HomeViewPageState extends State<HomeViewPage> {
                                 child: Icon(Icons.cancel_outlined, size: 30,)))
                           ],
                         )
-
                         ),
                       );
                     },);
@@ -208,7 +212,15 @@ class _HomeViewPageState extends State<HomeViewPage> {
                     title: Text("${tasks[index].task}"),
                     leading: Checkbox(
                       activeColor: Colors.blue,
-                      value: true, onChanged: (value) => tasks[index].isComplete,),
+                      value: tasks[index].isComplete, onChanged: (value) {
+                      setState(() {
+                        tasks[index] = TasksModel(
+                          id: tasks[index].id,
+                          task: tasks[index].task,
+                          isComplete: value ?? false,
+                        );
+                      });
+                      },),
                   ),
                 ),
               );

@@ -8,16 +8,16 @@ class TasksModel {
   Map<String, dynamic>toMap(){
     return {
       "id": id,
-      "task": task,
-      "isComplete": isComplete,
+      "title": task,
+      "isComplete": isComplete ? 1 : 0,
     };
   }
 
   factory TasksModel.formMap(Map<String, dynamic>maps){
     return TasksModel(
       id: maps["id"],
-      task: maps["task"],
-      isComplete: maps["isComplete"]
+      task: maps["title"],
+      isComplete: maps["isComplete"]==1
     );
   }
 

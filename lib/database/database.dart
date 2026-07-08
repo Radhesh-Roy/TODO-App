@@ -13,7 +13,7 @@ class TaskDatabase{
     db= await openDatabase(p.join(await getDatabasesPath(), 'todoDb'),onCreate: (db, version){
 return db.execute("create table TodoTable(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, isComplete INTEGER)");
 
-    }, version: 1);
+    }, version: 3);
     return db!;
   }
 
@@ -28,6 +28,17 @@ return db.execute("create table TodoTable(id INTEGER PRIMARY KEY AUTOINCREMENT, 
     final db= await getDb();
     final List<Map<String, dynamic>>maps=await db.query("TodoTable");
     return List.generate(maps.length, (index) => TasksModel.formMap(maps[index]),);
+  }
+
+  static Future<void> updateTask(TasksModel task) async {
+    final db = await getDb();
+
+    await db.update(
+      "TodoTable",
+      task.toMap(),
+      where: "id = ?",
+      whereArgs: [task.id],
+    );
   }
 
 }
