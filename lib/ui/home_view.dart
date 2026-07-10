@@ -37,8 +37,6 @@ class _HomeViewPageState extends State<HomeViewPage> {
     getTasks();
   }
 
-
-
   final key=GlobalKey<FormState>();
   TextEditingController task= TextEditingController();
 
