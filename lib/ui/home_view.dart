@@ -33,7 +33,6 @@ class _HomeViewPageState extends State<HomeViewPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getTasks();
   }
