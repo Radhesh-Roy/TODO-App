@@ -30,7 +30,6 @@ class _HomeViewPageState extends State<HomeViewPage> {
     await TaskDatabase.updateTask(task);
     await getTasks();
   }
-
   @override
   void initState() {
     super.initState();
