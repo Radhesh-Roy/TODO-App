@@ -42,6 +42,7 @@ class _HomeViewPageState extends State<HomeViewPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Color(0xffE6EAF4),
       floatingActionButton: FloatingActionButton(
